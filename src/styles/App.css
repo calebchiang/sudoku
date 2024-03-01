@@ -39,3 +39,7 @@
     transform: rotate(360deg);
   }
 }
+
+.newGameButton{
+  margin:20px;
+}

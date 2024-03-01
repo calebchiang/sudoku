@@ -2,6 +2,8 @@ import React from 'react';
 import Cell from './Cell';
 
 function Board({ board, onCellChange }) {
+  console.log(board);
+
   return (
     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(9, 50px)' }}>
       {board.map((row, rowIndex) => 

@@ -1,11 +1,14 @@
 import './styles/App.css';
 import React, { useState } from 'react';
 import Board from './Board';
+import { generateBoard } from './SudokuGenerator';
 
 function App() {
+const [board, setBoard] = useState(generateBoard());
 
-const initalBoard = Array(9).fill(null).map(() => Array(9).fill(0));
-const [board, setBoard] = useState(initalBoard);
+const handleNewGame = () => {
+    setBoard(generateBoard()); // Generate a new board for a new game
+};
 
 const handleCellChange = (rowIndex, colIndex, newValue) => {
   const val = parseInt(newValue, 10);
@@ -24,7 +27,8 @@ const handleCellChange = (rowIndex, colIndex, newValue) => {
  
   return (
     <div className="App">
-      <Board board={board} onCellChange={handleCellChange}/> 
+        <button className='newGameButton' onClick={handleNewGame}>Generate Game</button>
+        <Board board={board} onCellChange={handleCellChange}/>
     </div>
   );
 }
