@@ -1,0 +1,15 @@
+.cell {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    box-sizing: border-box; /* Include borders in the width and height */
+    border: 1px solid gray; /* Default thin border for all cells */
+  }
+
+.cell-right {
+  border-right: 3px solid black;
+}
+
+.cell-bottom {
+  border-bottom: 3px solid black;
+}

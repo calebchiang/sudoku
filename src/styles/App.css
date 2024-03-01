@@ -1,5 +1,8 @@
 .App {
-  text-align: center;
+  display: flex;           /* Use flexbox for easy centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  height:80vh;           /* Take up full viewport height */
 }
 
 .App-logo {
