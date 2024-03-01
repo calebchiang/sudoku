@@ -17,7 +17,7 @@ function Cell({value, onChange, rowIndex, colIndex}){
     return (
         <input className ={cellClass}
             type = "number"
-            value = {value}
+               value={value === 0 ? "" : value}
             onChange = {onChange}
             min = "1"
             max = "9"

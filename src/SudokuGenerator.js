@@ -19,17 +19,11 @@ function isValid(board, row, col, num){
     return true;
 }
 
-function generateBoard() {
+function generateBoard(difficulty) {
     const board = Array(9).fill(null).map(() => Array(9).fill(0)); // Initialize empty board
     console.log("Starting board generation");
-    let depth = 0;
 
     const tryFillBoard = (board) => {
-        depth++;
-        if(depth === 1000){
-            console.log("Maximum depth reached");
-            return false;
-        }
         for (let row = 0; row < 9; row++) {
             for (let col = 0; col < 9; col++) {
                 if (board[row][col] === 0) {
@@ -43,23 +37,54 @@ function generateBoard() {
                             if (tryFillBoard(board)) {
                                 return true;
                             }
-                            board[row][col] = 0;
+                            board[row][col] = 0; // Backtrack
                         }
                     }
-                    return false;
+                    return false; // Trigger backtracking
                 }
             }
         }
-        return true;
+        return true; // Solved
     };
-
 
     if (tryFillBoard(board)) {
         console.log("Board generated successfully");
-        return board;
+
+
+        const puzzleBoard = board.map(row => [...row]);
+        removeNumbers(puzzleBoard, difficulty);
+
+        return { solvedBoard: board, puzzleBoard: puzzleBoard };
     } else {
         console.log("Failed to generate board");
-        return null; // In case no solution is found, which shouldn't happen in Sudoku
+        return null; // In case no solution is found
+    }
+}
+
+
+function removeNumbers(board, level) {
+    let numbersToRemove;
+    switch (level) {
+        case 'easy':
+            numbersToRemove = 20;
+            break;
+        case 'medium':
+            numbersToRemove = 30;
+            break;
+        case 'hard':
+            numbersToRemove = 40;
+            break;
+        default:
+            numbersToRemove = 30;
+    }
+
+    while (numbersToRemove > 0) {
+        let row = Math.floor(Math.random() * 9);
+        let col = Math.floor(Math.random() * 9);
+        if (board[row][col] !== 0) { // Ensure we only remove a number once
+            board[row][col] = 0;
+            numbersToRemove--;
+        }
     }
 }
 
